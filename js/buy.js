@@ -13,4 +13,3 @@ for(i=0;i<orderList.length;i++){
         shop.appendChild(block);
     }
 }
-console.log(orderList[0]);
