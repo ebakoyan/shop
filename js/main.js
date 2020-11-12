@@ -15,18 +15,36 @@ function myFunction(){
         input=document.createElement("input")
         input.setAttribute("type","checkbox");
         input.setAttribute("name",`${i}`)
-        input.setAttribute("onclick","set(this)")
+        // input.setAttribute("onclick","set(this)")
+        if(sessionStorage.getItem('order')!=null){
+            myList=sessionStorage.getItem('order');
+        
+        for(j=0;j<myList.length;j++){
+            if(myList[j]!=','){
+                if(myList[j]==i)
+                input.checked=true;
+            }
+        }
+        }
         block.appendChild(label);
         block.appendChild(input);
         shop.appendChild(block);
     }
 }
 orderList=[];
-function set(a){
-    orderList.push(Number(a.name));
-}
+// function set(a){
+//     if(a[i])
+//     orderList.push(Number(a.name));
+// }
 function buy(){
-    sessionStorage.clear();
+
+
+    blockList=document.getElementsByClassName("block");
+    for(i=0;i<blockList.length;i++){
+        if(blockList[i].getElementsByTagName("input")[0].checked==true)
+            orderList.push(blockList[i].getElementsByTagName('input')[0].name);
+    }
+  
     sessionStorage.setItem('order',orderList);
-    window.location.href="./buy.html"
+    window.location.href="buy.html"
 }
