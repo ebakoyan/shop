@@ -3,6 +3,14 @@
     margin: 0;
     box-sizing: border-box;
 }
+body{
+    // background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background: url("https://www.packagingstrategies.com/ext/resources/2018-Postings/Packaging-News/eCommerce.jpg?1520884628");
+    // background-image: url("https://iem4i1awkgx4628vb7ghf4f2-wpengine.netdna-ssl.com/wp-content/uploads/2016/05/hich-is-the-best-ecommerce-shopping-cart.jpg");
+}
 .setRed{
     transition: 1s;
     transform: scale(1.1);
@@ -16,9 +24,10 @@
     justify-content: space-evenly;
 }
 .block{
+    // overflow: hidden;
     border-radius: 10px;
     padding: 8px;
-    border:3px solid black;
+    border:3px solid rgb(255, 255, 255);
     cursor: pointer;
     transition: 1s;
     margin:30px;

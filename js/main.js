@@ -5,6 +5,8 @@
         img=document.createElement('img');
         img.src=`./img/${orderList[i]}`;
         block.classList.add("block");
+        img.classList.add("wow");
+        img.classList.add("tada");
         block.id=`item${i+1}`;
         block.appendChild(img);
         block.setAttribute('onclick','setRed(this)')
