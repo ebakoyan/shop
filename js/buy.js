@@ -1,17 +1,18 @@
-if(sessionStorage.getItem("order")!=null){
-    orderList=sessionStorage.getItem("order")
-
+if(localStorage.getItem('selectedItem')!=null){
     shop=document.querySelector(".shop");
-    for(i=0;i<orderList.length;i++){
-        if(orderList[i]!=','){
-            block=document.createElement("div");
-            img=document.createElement("img");
-            b=orderList[i];
-            img.src=`./img/item${b}.webp`;
-            block.classList.add("block");
-            block.appendChild(img);
-
-            shop.appendChild(block);
-        }
+    selectedItem=JSON.parse(localStorage.getItem('selectedItem'));
+    for(i=0;i<selectedItem.length;i++){
+        block=document.createElement("div");
+        img=document.createElement('img');
+        img.src=`./img/${selectedItem[i]}.webp`;
+        block.classList.add("block");
+        block.appendChild(img);
+        block.style.border="3px solid red"
+        shop.appendChild(block);
     }
+    document.getElementById('money').innerHTML=`Total ${(selectedItem.length)*10}$`;
+
+}
+else{
+    window.location.href="index.html";
 }
