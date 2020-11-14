@@ -30,3 +30,14 @@ function buy(){
     }
     else alert("Select item");
 }
+if(localStorage.getItem('selectedItem')!=null){
+    selectedItem=JSON.parse(localStorage.getItem('selectedItem'))
+    block=document.querySelectorAll('.block');
+    for(i=0;i<block.length;i++){
+        for(j=0;j<selectedItem.length;j++){
+            if(block[i].id==selectedItem[j])
+                block[i].classList.add("setRed");
+        }
+    }
+    console.log(selectedItem)
+}
