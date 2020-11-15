@@ -196,7 +196,6 @@ button:hover {
 
 .checkParent .checkOut .selectedItems {
   padding: 5px;
-  border: 3px #e41a1a solid;
   border-radius: 5px;
 }
 
@@ -209,5 +208,20 @@ button:hover {
 #itemCount {
   -webkit-transition: 1s;
   transition: 1s;
+}
+
+.itemInfo {
+  margin-top: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.itemInfo i {
+  cursor: pointer;
+  color: #ecd13a;
 }
 /*# sourceMappingURL=style.css.map */

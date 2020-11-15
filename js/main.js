@@ -21,7 +21,9 @@ for(i=0;i<orderList.length;i++){
 }
 function shakeCart(){
     shopCart=document.querySelector('#cart');
-    shopCart.style.transform="rotate(360deg)"
+    if(shopCart.style.transform=="rotate(360deg)")
+        shopCart.style.transform="";
+    else shopCart.style.transform="rotate(360deg)"
 
 }
 function setRed(block){
@@ -33,7 +35,7 @@ function setRed(block){
             s++;
     }
     document.querySelector('#itemCount').innerHTML=s;
-    // shakeCart();
+    shakeCart();
 }
 function buy(){
     window.location.href="buy.html";
@@ -66,6 +68,12 @@ if(selectedItem.length>0){
         tempText.innerHTML=`${tempSelected} = ${tempPrice}$`;
         s+=tempPrice;
         child.appendChild(tempText);
+        fontAwesome=document.createElement('i');
+        fontAwesome.classList.add('fas');
+        fontAwesome.classList.add('fa-times-circle')
+        fontAwesome.classList.add('fa-2x')
+        fontAwesome.setAttribute('onclick','removeItem(this)')
+        child.appendChild(fontAwesome);
         parent.appendChild(child);
     }
     localStorage.setItem('total',s);
@@ -85,4 +93,15 @@ if(localStorage.getItem("selectedItem")!=null){
 }
 function myClose(){
     document.querySelector(".checkParent").style.display='none';
+}
+function removeItem(blockChild){
+    block=blockChild.parentNode;
+    item=block.querySelector('h2').innerHTML;
+    item=item.slice(0,-6)
+    selectedItem=JSON.parse(localStorage.getItem('selectedItem'));
+    i=selectedItem.indexOf(item);
+    selectedItem.splice(i,1)
+    console.log(selectedItem);
+    localStorage.setItem('selectedItem',JSON.stringify(selectedItem));
+    block.parentNode.removeChild(block);
 }
