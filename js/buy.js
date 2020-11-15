@@ -11,7 +11,7 @@ if(localStorage.getItem('selectedItem')!=null){
         shop.appendChild(block);
     }
     document.getElementById('money').innerHTML=`Total ${localStorage.getItem('total')}$`;
-
+    document.getElementById('money').style.color="white";
 }
 else{
     window.location.href="index.html";
