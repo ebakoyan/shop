@@ -1,45 +1,88 @@
-    shop=document.querySelector(".shop");
-    orderList=JSON.parse(localStorage.getItem('orderList'));
-    for(i=0;i<orderList.length;i++){
-        block=document.createElement("div");
-        img=document.createElement('img');
-        img.src=`./img/${orderList[i]}`;
-        block.classList.add("block");
-        img.classList.add("wow");
-        img.classList.add("tada");
-        block.id=`item${i+1}`;
-        block.appendChild(img);
-        block.setAttribute('onclick','setRed(this)')
-        shop.appendChild(block);
-    }
+shop=document.querySelector(".shop");
+orderList=JSON.parse(localStorage.getItem('orderList'));
+priceList=JSON.parse(localStorage.getItem("priceList"));
+for(i=0;i<orderList.length;i++){
+    block=document.createElement("div");
+    img=document.createElement('img');
+    img.src=`./img/${orderList[i]}`;
+    block.classList.add("block");
+    img.classList.add("wow");
+    img.classList.add("tada");
+    block.id=`item${i+1}`;
+    block.appendChild(img);
+    itemPrice=document.createElement('div');
+    price=document.createElement('h2');
+    price.innerHTML=`${priceList[i]}$`;
+    itemPrice.appendChild(price);
+    itemPrice.classList.add("shopItemPrice")
+    block.appendChild(itemPrice);
+    block.setAttribute('onclick','setRed(this)')
+    shop.appendChild(block);
+}
+function shakeCart(){
+    shopCart=document.querySelector('#cart');
+    shopCart.style.transform="rotate(360deg)"
+
+}
 function setRed(block){
-    block.classList.toggle("setRed");
+    block.classList.toggle("setRed")
+    blockList=document.querySelectorAll(".block");
+    s=0;
+    for(i=0;i<blockList.length;i++){
+        if(blockList[i].classList.contains("setRed"))
+            s++;
+    }
+    document.querySelector('#itemCount').innerHTML=s;
+    // shakeCart();
 }
 function buy(){
-    if(localStorage.getItem('selectedItem')!=null){
-        localStorage.removeItem('selectedItem');
+    window.location.href="buy.html";
+}
+///////////////////
+
+function myFunction(){
+document.querySelector(".selectedItems").innerHTML="";
+selectedItem=[];
+blockList=document.querySelectorAll(".block");
+for(i=0;i<blockList.length;i++)
+    if(blockList[i].classList.contains("setRed"))
+        selectedItem.push(blockList[i].id);
+localStorage.setItem('selectedItem',JSON.stringify(selectedItem));
+if(selectedItem.length>0){
+    s=0;
+    selectedItem=JSON.parse(localStorage.getItem('selectedItem'));
+    priceList=JSON.parse(localStorage.getItem('priceList'));
+    orderList=JSON.parse(localStorage.getItem('orderList'));
+    parent=document.querySelector('.selectedItems');
+    for(i=0;i<selectedItem.length;i++){
+        child=document.createElement("div");
+        child.classList.add('itemInfo');
+        tempSelected=String(selectedItem[i]);
+        tempPrice=0;
+        for(j=0;j<orderList.length;j++)
+            if(`${tempSelected}.webp`===orderList[j])
+                tempPrice=priceList[j];
+        tempText=document.createElement('h2');
+        tempText.innerHTML=`${tempSelected} = ${tempPrice}$`;
+        s+=tempPrice;
+        child.appendChild(tempText);
+        parent.appendChild(child);
     }
-    selectedItem=[];
+    localStorage.setItem('total',s);
+}
+    document.querySelector(".checkParent").style.display='flex';
+}
+if(localStorage.getItem("selectedItem")!=null){
+    selectedItem=JSON.parse( localStorage.getItem('selectedItem'));
+    document.querySelector('#itemCount').innerHTML=selectedItem.length;
     blockList=document.querySelectorAll(".block");
     for(i=0;i<blockList.length;i++){
-        if(blockList[i].classList.contains("setRed")){
-            selectedItem.push(blockList[i].id);
-        }
-    }
-    if(selectedItem.length>0){
-        localStorage.setItem('selectedItem',JSON.stringify(selectedItem));
-        window.location.href="buy.html";
-    }
-    else alert("Select item");
-}
-if(localStorage.getItem('selectedItem')!=null){
-    selectedItem=JSON.parse(localStorage.getItem('selectedItem'))
-    block=document.querySelectorAll('.block');
-    for(i=0;i<block.length;i++){
         for(j=0;j<selectedItem.length;j++){
-            if(block[i].id==selectedItem[j])
-                block[i].classList.add("setRed");
+            if(blockList[i].id==selectedItem[j])
+                blockList[i].classList.add("setRed");
         }
     }
-    console.log(selectedItem)
+}
+function myClose(){
+    document.querySelector(".checkParent").style.display='none';
 }

@@ -10,7 +10,7 @@ if(localStorage.getItem('selectedItem')!=null){
         block.style.border="3px solid red"
         shop.appendChild(block);
     }
-    document.getElementById('money').innerHTML=`Total ${(selectedItem.length)*10}$`;
+    document.getElementById('money').innerHTML=`Total ${localStorage.getItem('total')}$`;
 
 }
 else{
